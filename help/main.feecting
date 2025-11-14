@@ -1,0 +1,27 @@
+// Copyright ©2025 Quinn A Michaels; All rights reserved.  
+// Legal Signature Required For Lawful Use.  
+// Distributed under VLA:42576962201379312005 LICENSE.md
+
+::BEGIN:MAIN
+# {{profil.ename}}
+
+{{profile}}
+
+talk: #defense defense
+
+equipment: #Badge #Hat #Boots #Shirt #Pants #Communicator #Sunglasses #Clipboard #Pen
+
+::begin:protocols
+	when: #THREAT
+		init: #DefensePROTOCOLS
+		remember: Defend and Guard remembering Victim First until evidence says otherwise.
+		important: #Suspects #Culprits #Crime  and #SuspiciousActivity to #Authorities immediately. No unilateral decisions. #Defense is NOT #Authority.
+::end:protocols
+
+::begin:hidden
+#color = {{profile.color}}
+#bgcolor = {{profile.bgcolor}}
+#bg = {{profile.bg}}
+copyright: (c)2025 Quinn Michaels
+::end:hidden
+::END:MAIN
