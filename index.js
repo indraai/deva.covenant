@@ -42,7 +42,24 @@ const COVENANT = new Deva({
   modules: {},
   deva: {},
   func: {},
-  methods: {},
+  methods: {
+    async members(packet) {
+      const {id, q} = packet;
+      const {meta, text} = q;
+      const {key, method, params} = meta;
+
+      this.context(method, id); // set context meta.method
+      
+      this.prompt(`${key}:${method} ask Recusion Deva`);
+      this.state('set', `${key}:${method}:recursion:${id.uid}`); // set state set
+      const recursion = await this.question(`${this.askChr}recursion uid`);
+      
+      
+      console.log('recursion', recursion);
+      
+      return true;
+    }
+  },
   onInit(data, resolve) {
     const {personal} = this.license(); // get the license config
     const agent_license = this.info().VLA; // get agent license
