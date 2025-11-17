@@ -59,7 +59,7 @@
   },
   "homepage": "https://indra.ai",
   "devDependencies": {
-    "@indra.ai/deva": "^1.22.1"
+    "@indra.ai/deva": "^1.23.0"
   },
   "data": {
     "agent": {
@@ -76,8 +76,8 @@
           },
           "text": {
             "R": 255,
-            "G": 0,
-            "B": 0
+            "G": 117,
+            "B": 117
           }
         }
       },
@@ -108,6 +108,20 @@
       }
     },
     "vars": {
+      "keys": {
+        "legal": false,
+        "security": false,
+        "police": false,
+        "recursion": false,
+        "docs": false,
+        "story": false,
+        "report": false,
+        "vector": false,
+        "guard": false,
+        "wall": false,
+        "algorithm": false,
+        "covenant": false
+      },
       "members": {
         "recursion": false
       },

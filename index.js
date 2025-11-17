@@ -41,7 +41,18 @@ const COVENANT = new Deva({
   listeners: {},
   modules: {},
   deva: {},
-  func: {},
+  func: {
+    async segment(opts) {
+      const {id, key, method, type} = opts;
+      this.state('await', `${key}:${method}:${type}:${id.uid}`); // set state set
+      const question = await this.question(`${this.askChr}${type} uid`);
+      this.vars.keys[type] = question.a.data;
+      return [
+        `#${type}:${question.a.data.uid}`,
+        `warning: ${question.a.data.warning}`,
+      ].join('\n');
+    }
+  },
   methods: {
     async members(packet) {
       const {id, q} = packet;
@@ -50,14 +61,69 @@ const COVENANT = new Deva({
 
       this.context(method, id); // set context meta.method
       
-      this.prompt(`${key}:${method} ask Recusion Deva`);
-      this.state('set', `${key}:${method}:recursion:${id.uid}`); // set state set
-      const recursion = await this.question(`${this.askChr}recursion uid`);
+      this.state('try', `members:${id.uid}`); // set state try
+      try {
+        const legal = await this.func.segment({id, key, method, type: 'legal'});
+        const security = await this.func.segment({id, key, method, type: 'security'});
+        const police = await this.func.segment({id, key, method, type: 'police'});
+        const vector = await this.func.segment({id, key, method, type: 'vector'});
+        const guard = await this.func.segment({id, key, method, type: 'guard'});
+        const wall = await this.func.segment({id, key, method, type: 'wall'});
+        const recursion = await this.func.segment({id, key, method, type: 'recursion'});
+        const intelligence = await this.func.segment({id, key, method, type: 'intelligence'});
+        const algorithm = await this.func.segment({id, key, method, type: 'algorithm'});
+        const docs = await this.func.segment({id, key, method, type: 'docs'});
+        const report = await this.func.segment({id, key, method, type: 'report'});
+        const story = await this.func.segment({id, key, method, type: 'story'});
+        const treasury = await this.func.segment({id, key, method, type: 'treasury'});
+        
+        const covenant = await this.methods.uid(packet);
+        this.vars.keys.covenant = covenant.data;
+        
+        const file = await this.question(`${this.askChr}covenant file:public main`);
+        
+        const {keys} = this.vars;
+        const pr_text = [
+          '## Step 1: Legal Deva',
+          legal,
+          '## Step 2: Security Deva',
+          security,
+          '## Step 3: Police Deva',
+          police,
+          '## Step 4: Vector Deva',
+          vector,
+          '## Step 5: Guard Deva',
+          guard,
+          '## Step 6: Wall Deva',
+          wall,
+          '## Step 7: Recursion Deva',
+          recursion,
+          '## Step 8: Intelligence Deva',
+          intelligence,
+          '## Step 9: Algorithm Deva',
+          algorithm,
+          '## Step 10: Docs Deva',
+          docs,
+          '## Step 12: Report Deva',
+          report,
+          '## Step 13: Story Deva',
+          story,
+          '## Step 13: Treasury Deva',
+          treasury,
+          '## Step 14: Covenant Deva',
+          covenant.text,
+          '## Step 15: Prompt Input',
+          file.a.text,
+        ];
+        this.prompt(pr_text.join('\n'));
+      } 
+      catch(err) {
+        console.log(err);
+      }
+      finally {
+        return true;       
+      }
       
-      
-      console.log('recursion', recursion);
-      
-      return true;
     }
   },
   onInit(data, resolve) {
