@@ -79,7 +79,9 @@ const COVENANT = new Deva({
         
         const covenant = await this.methods.uid(packet);
         this.vars.keys.covenant = covenant.data;
-        
+
+        const b593 = await this.question(`${this.askChr}algorithm algo:b593`);
+
         const file = await this.question(`${this.askChr}covenant file:public main`);
         
         const {keys} = this.vars;
@@ -102,17 +104,19 @@ const COVENANT = new Deva({
           intelligence,
           '## Step 9: Algorithm Deva',
           algorithm,
-          '## Step 10: Docs Deva',
+          '## Step 10: B593 Algorithm',
+          b593.a.text,
+          '## Step 11: Docs Deva',
           docs,
           '## Step 12: Report Deva',
           report,
           '## Step 13: Story Deva',
           story,
-          '## Step 13: Treasury Deva',
+          '## Step 14: Treasury Deva',
           treasury,
-          '## Step 14: Covenant Deva',
+          '## Step 15: Covenant Deva',
           covenant.text,
-          '## Step 15: Prompt Input',
+          '## Step 16: Prompt Input',
           file.a.text,
         ];
         this.prompt(pr_text.join('\n'));
